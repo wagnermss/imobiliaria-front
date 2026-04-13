@@ -8,6 +8,7 @@ import { ImovelService } from '../../services/imovel.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cadastro-imovel.component.html',
+  styleUrl: './cadastro-imovel.component.css'
   
 })
 export class CadastroImovelComponent {
