@@ -1,12 +1,15 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+// Importação do RouterOutlet removida
+import { CadastroImovelComponent } from './components/cadastro-imovel/cadastro-imovel.component'; 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [CadastroImovelComponent], 
+  template: `
+    <app-cadastro-imovel></app-cadastro-imovel>
+  `,
 })
-export class App {
-  protected readonly title = signal('imobiliaria-front');
+export class App { 
+  title = 'imobiliaria-front';
 }

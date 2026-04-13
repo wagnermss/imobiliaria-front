@@ -1,0 +1,42 @@
+<div style="max-width: 500px; margin: 20px auto; font-family: sans-serif;">
+  <h2>Cadastrar Imóvel</h2>
+  
+  <form [formGroup]="imovelForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; gap: 15px;">
+    
+    <div style="display: flex; flex-direction: column;">
+      <label>Título:</label>
+      <input type="text" formControlName="titulo" placeholder="Ex: Casa com piscina">
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <label>Endereço:</label>
+      <input type="text" formControlName="endereco" placeholder="Ex: Rua das Flores, 123">
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <label>Bairro:</label>
+      <input type="text" formControlName="bairro" placeholder="Ex: Centro">
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <label>Zona:</label>
+      <select formControlName="zona">
+        <option value="" disabled>Selecione a zona...</option>
+        <option value="Norte">Norte</option>
+        <option value="Sul">Sul</option>
+        <option value="Leste">Leste</option>
+        <option value="Oeste">Oeste</option>
+        <option value="Centro">Centro</option>
+      </select>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <label>Valor (R$):</label>
+      <input type="number" formControlName="valor" placeholder="Ex: 250000">
+    </div>
+
+    <button type="submit" [disabled]="imovelForm.invalid" style="padding: 10px; cursor: pointer;">
+      Salvar Imóvel
+    </button>
+  </form>
+</div>
