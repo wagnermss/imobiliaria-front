@@ -1,59 +1,63 @@
-# ImobiliariaFront
+# 🏢 Frontend: Gerenciamento de Imóveis (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Bem-vindo ao repositório do **Frontend de Gerenciamento de Imóveis**! Este projeto é uma Single Page Application (SPA) desenvolvida em **Angular** para apresentar e gerenciar a interface de usuário do nosso sistema de imóveis. 
 
-## Development server
+Este projeto se comunica diretamente com a nossa API RESTful (Spring Boot), enviando e recebendo dados dos imóveis.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🛠️ Tecnologias Utilizadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O projeto utiliza as seguintes tecnologias e ferramentas:
 
-## Code scaffolding
+* **Angular** (v21.2) - Framework principal para construção da interface.
+* **TypeScript** - Superconjunto de JavaScript que adiciona tipagem estática.
+* **RxJS** - Utilizado para programação reativa e chamadas assíncronas (HTTP).
+* **NPM** - Gerenciador de pacotes do Node.js.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## ⚙️ Pré-requisitos
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Para rodar este projeto na sua máquina, você vai precisar instalar:
 
-```bash
-ng generate --help
-```
+1. **Node.js** (recomenda-se a versão LTS mais recente).
+2. **NPM** (normalmente já vem incluído com a instalação do Node.js).
+3. *(Opcional)* **Angular CLI**: Você pode instalar globalmente através do comando `npm install -g @angular/cli`.
 
-## Building
+---
 
-To build the project run:
+## 🚀 Como Executar o Projeto Localmente
 
-```bash
-ng build
-```
+Siga estes passos para iniciar a aplicação no seu navegador:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 1. Clonar e acessar a pasta do projeto
+Abra o terminal e navegue até a pasta raiz do projeto (onde se encontra o arquivo `package.json`).
 
-## Running unit tests
+### 2. Instalar as dependências
+Antes de rodar o projeto pela primeira vez, você precisa baixar todas as bibliotecas necessárias. Execute o comando:
+> npm install
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### 3. Iniciar o servidor de desenvolvimento
+Após a instalação, você pode iniciar a aplicação executando:
+> npm start
 
-```bash
-ng test
-```
+*(Este comando vai executar o `ng serve` em segundo plano).*
 
-## Running end-to-end tests
+### 4. Abrir no Navegador
+Abra o seu navegador favorito e acesse:
+**http://localhost:4200/**
 
-For end-to-end (e2e) testing, run:
+⚠️ **Atenção:** Para que o sistema funcione totalmente (como salvar ou listar novos imóveis), garanta que o seu projeto **Backend (Spring Boot)** está rodando simultaneamente na porta `8080`! O serviço do Angular está configurado para fazer chamadas para `http://localhost:8080/api/imoveis`.
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🤝 Estrutura do Código e Componentes
 
-## Additional Resources
+A organização principal do código fica dentro da pasta `src/app/`, dividida nas seguintes responsabilidades:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* **`models/`**: Contém as interfaces (ex: `imovel.ts`) que refletem os dados vindos do backend.
+* **`services/`**: Contém a lógica de comunicação com a API (`imovel.service.ts`).
+* **`components/`**: Onde ficam as telas da nossa aplicação:
+  * **`cadastro-imovel`**: Formulário responsável por coletar os dados e criar um novo imóvel no sistema.
+  * **`lista-imoveis`**: Tabela/Lista responsável por consultar a API e exibir todos os imóveis já cadastrados.
