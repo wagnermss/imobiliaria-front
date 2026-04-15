@@ -15,4 +15,8 @@ export class ImovelService {
   cadastrarImovel(imovel: Imovel): Observable<Imovel> {
     return this.http.post<Imovel>(this.apiUrl, imovel);
   }
+
+  listarImoveis(): Observable<Imovel[]> {
+    return this.http.get<Imovel[]>(this.apiUrl);
+  }
 }

@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>Lista de Imóveis</h2>
+  
+  <p *ngIf="imoveis.length === 0">Nenhum imóvel cadastrado no momento.</p>
+
+  <ul *ngIf="imoveis.length > 0">
+    <li *ngFor="let imovel of imoveis" style="margin-bottom: 10px; padding: 10px; border: 1px solid #ccc;">
+      <strong>Título:</strong> {{ imovel.titulo }} <br>
+      <strong>Endereço:</strong> {{ imovel.endereco }} <br>
+      <strong>Bairro:</strong> {{ imovel.bairro }} <br>
+      <strong>Zona:</strong> {{ imovel.zona }} <br>
+      <strong>Valor:</strong> R$ {{ imovel.valor }}
+    </li>
+  </ul>
+</div>
