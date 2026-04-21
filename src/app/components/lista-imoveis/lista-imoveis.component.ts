@@ -1,33 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router'; 
 import { ImovelService } from '../../services/imovel.service';
 import { Imovel } from '../../models/imovel';
 
 @Component({
   selector: 'app-lista-imoveis',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './lista-imoveis.component.html',
-  // styleUrls: ['./lista-imoveis.component.css']
+  imports: [CommonModule, RouterLink], 
+  templateUrl: './lista-imoveis.component.html'
 })
 export class ListaImoveisComponent implements OnInit {
   imoveis: Imovel[] = [];
 
   constructor(private imovelService: ImovelService) {}
 
-  
   ngOnInit(): void {
     this.carregarImoveis();
   }
 
   carregarImoveis(): void {
-    this.imovelService.listarImoveis().subscribe({
-      next: (dados) => {
-        this.imoveis = dados; 
-      },
-      error: (erro) => {
-        console.error('Erro ao buscar a lista de imóveis', erro);
-      }
+    this.imovelService.listarImoveis().subscribe(dados => {
+      this.imoveis = dados;
     });
+  }
+
+  excluir(id?: number): void {
+    if (id && confirm('Tem certeza que deseja excluir este imóvel?')) {
+      this.imovelService.excluirImovel(id).subscribe(() => {
+        alert('Imóvel excluído!');
+        this.carregarImoveis(); 
+      });
+    }
   }
 }

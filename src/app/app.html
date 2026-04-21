@@ -1,2 +1,12 @@
-<app-cadastro-imovel></app-cadastro-imovel>
+<nav style="padding: 1rem; background-color: #f8f9fa; border-bottom: 1px solid #dee2e6; margin-bottom: 2rem;">
+  <div style="display: flex; gap: 1rem; max-width: 1200px; margin: 0 auto;">
+    <h2 style="margin: 0; margin-right: auto;">Imobiliária</h2>
+    
+    <a routerLink="/lista" style="text-decoration: none; color: #007ad9; font-weight: bold;">Ver Imóveis</a>
+    <a routerLink="/cadastro" style="text-decoration: none; color: #007ad9; font-weight: bold;">Cadastrar Imóvel</a>
+  </div>
+</nav>
 
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+  <router-outlet></router-outlet>
+</div>

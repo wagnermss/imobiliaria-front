@@ -1,44 +1,35 @@
-<div class="container">
-  <h2>Cadastrar Imóvel</h2>
-  
-  <form [formGroup]="imovelForm" (ngSubmit)="onSubmit()" class="form-imovel">
+<div style="padding: 20px; max-width: 500px; margin: 0 auto; background: #f9f9f9; border-radius: 8px;">
+  <h2 style="text-align: center; color: #333;">{{ idEdicao ? 'Editar Imóvel' : 'Novo Cadastro' }}</h2>
+
+  <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
     
-    <div class="form-group">
-      <label>Título:</label>
-      <input type="text" formControlName="titulo" placeholder="Ex: Casa com piscina">
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Título:</label>
+      <input type="text" [(ngModel)]="imovel.titulo" placeholder="Ex: Casa com piscina" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     </div>
 
-    <div class="form-group">
-      <label>Endereço:</label>
-      <input type="text" formControlName="endereco" placeholder="Ex: Rua das Flores, 123">
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Endereço:</label>
+      <input type="text" [(ngModel)]="imovel.endereco" placeholder="Ex: Rua das Flores, 123" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     </div>
 
-    <div class="form-group">
-      <label>Bairro:</label>
-      <input type="text" formControlName="bairro" placeholder="Ex: Centro">
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Bairro:</label>
+      <input type="text" [(ngModel)]="imovel.bairro" placeholder="Ex: Centro" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     </div>
 
-    <div class="form-group">
-      <label>Zona:</label>
-      <select formControlName="zona">
-        <option value="" disabled>Selecione a zona...</option>
-        <option value="Norte">Norte</option>
-        <option value="Sul">Sul</option>
-        <option value="Leste">Leste</option>
-        <option value="Oeste">Oeste</option>
-        <option value="Centro">Centro</option>
-      </select>
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Zona:</label>
+      <input type="text" [(ngModel)]="imovel.zona" placeholder="Ex: Zona Sul" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     </div>
 
-    <div class="form-group">
-      <label>Valor (R$):</label>
-      <input type="number" formControlName="valor" placeholder="Ex: 2500000">
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Valor (R$):</label>
+      <input type="number" [(ngModel)]="imovel.valor" placeholder="Ex: 250000" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
     </div>
 
-    <button type="submit" [disabled]="imovelForm.invalid">
+    <button (click)="salvar()" style="margin-top: 10px; background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;">
       Salvar Imóvel
     </button>
-
-    
-  </form>
+  </div>
 </div>

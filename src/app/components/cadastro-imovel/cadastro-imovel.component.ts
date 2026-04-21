@@ -1,44 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImovelService } from '../../services/imovel.service';
-
+import { Imovel } from '../../models/imovel';
 
 @Component({
   selector: 'app-cadastro-imovel',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './cadastro-imovel.component.html',
-  styleUrl: './cadastro-imovel.component.css'
-  
+  imports: [CommonModule, FormsModule],
+  templateUrl: './cadastro-imovel.component.html'
 })
-export class CadastroImovelComponent {
-  imovelForm: FormGroup;
+export class CadastroImovelComponent implements OnInit {
+  imovel: Imovel = { titulo: '', endereco: '', bairro: '', zona: '', valor: 0 };
+  idEdicao: number | null = null;
 
-  constructor(private fb: FormBuilder, private imovelService: ImovelService) {
-    this.imovelForm = this.fb.group({
-      titulo: ['', Validators.required],
-      endereco: ['', Validators.required],
-      bairro: ['', Validators.required],
-      zona: ['', Validators.required],
-      valor: [null, [Validators.required, Validators.min(1)]]
-    });
+  constructor(
+    private imovelService: ImovelService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
+      this.idEdicao = Number(idParam);
+      this.imovelService.buscarPorId(this.idEdicao).subscribe(dados => {
+        this.imovel = dados;
+      });
+    }
   }
 
-  onSubmit() {
-    if (this.imovelForm.valid) {
-      this.imovelService.cadastrarImovel(this.imovelForm.value).subscribe({
-        next: (resposta) => {
-          alert('Imóvel cadastrado com sucesso!');
-          this.imovelForm.reset();
-        },
-        error: (erro) => {
-          console.error('Erro ao cadastrar:', erro);
-          alert('Erro ao comunicar com o servidor.');
-        }
+  salvar(): void {
+    if (this.idEdicao) {
+      this.imovelService.atualizarImovel(this.idEdicao, this.imovel).subscribe(() => {
+        alert('Imóvel atualizado com sucesso!');
+        this.router.navigate(['/lista']);
       });
     } else {
-      alert('Preencha todos os campos corretamente.');
+      this.imovelService.cadastrarImovel(this.imovel).subscribe(() => {
+        alert('Imóvel cadastrado com sucesso!');
+        this.router.navigate(['/lista']);
+      });
     }
   }
 }
