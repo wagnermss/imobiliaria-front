@@ -1,0 +1,29 @@
+<div style="max-width: 400px; margin: 80px auto; padding: 30px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Criar Conta</h2>
+  
+  <div style="display: flex; flex-direction: column; gap: 15px;">
+    
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Nome Completo:</label>
+      <input type="text" [(ngModel)]="novoUsuario.nome" placeholder="Seu nome" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">E-mail:</label>
+      <input type="email" [(ngModel)]="novoUsuario.email" placeholder="Seu e-mail" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+    
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Senha:</label>
+      <input type="password" [(ngModel)]="novoUsuario.senha" placeholder="Crie uma senha" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+    
+    <button (click)="cadastrar()" style="background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px;">
+      Cadastrar
+    </button>
+    
+    <div style="text-align: center; margin-top: 15px;">
+      <a routerLink="/login" style="color: #6c757d; text-decoration: none; font-weight: bold; cursor: pointer;">Voltar ao Login</a>
+    </div>
+  </div>
+</div>

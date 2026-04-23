@@ -1,0 +1,24 @@
+<div style="max-width: 400px; margin: 80px auto; padding: 30px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Acessar Sistema</h2>
+  
+  <div style="display: flex; flex-direction: column; gap: 15px;">
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">E-mail:</label>
+      <input type="email" [(ngModel)]="credenciais.email" placeholder="Seu e-mail" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+    
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-weight: bold; margin-bottom: 5px;">Senha:</label>
+      <input type="password" [(ngModel)]="credenciais.senha" placeholder="Sua senha" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    </div>
+    
+    <button (click)="fazerLogin()" style="background-color: #007bff; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px;">
+      Entrar
+    </button>
+    
+    <div style="text-align: center; margin-top: 15px;">
+      <span style="color: #555;">Não tem uma conta? </span>
+      <a routerLink="/cadastro-usuario" style="color: #007bff; font-weight: bold; text-decoration: none; cursor: pointer;">Cadastre-se</a>
+    </div>
+  </div>
+</div>

@@ -1,29 +1,43 @@
-<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h2 style="color: #333;">Lista de Imóveis</h2>
-  </div>
-  
-  <div *ngIf="imoveis.length === 0" style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 4px; border: 1px solid #ffeeba;">
-    Nenhum imóvel cadastrado no momento.
-  </div>
+<div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+  <h2 style="color: #374151; margin-top: 0; margin-bottom: 1.5rem; font-size: 1.8rem;">
+      Catálogo de Imóveis
+  </h2>
 
-  <ul *ngIf="imoveis.length > 0" style="list-style: none; padding: 0;">
-    <li *ngFor="let imovel of imoveis" style="background: #fff; margin-bottom: 15px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+  <p-table [value]="imoveis" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-striped">
       
-      <h3 style="margin: 0 0 10px 0; color: #0056b3;">{{ imovel.titulo }}</h3>
-      <p style="margin: 5px 0; color: #555;"><strong>📍 Local:</strong> {{ imovel.endereco }} - {{ imovel.bairro }} ({{ imovel.zona }})</p>
-      <p style="margin: 5px 0; font-size: 18px; color: #28a745;"><strong>💰 R$ {{ imovel.valor }}</strong></p>
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="color: #4b5563;">Título</th>
+              <th style="color: #4b5563;">Endereço</th>
+              <th style="color: #4b5563;">Bairro</th>
+              <th style="color: #4b5563;">Zona</th>
+              <th style="color: #4b5563;">Valor</th>
+              
+          </tr>
+      </ng-template>
       
-      <div style="margin-top: 15px; display: flex; gap: 10px;">
-        <button [routerLink]="['/editar', imovel.id]" style="background-color: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">
-
-        </button>
-        
-        <button (click)="excluir(imovel.id)" style="background-color: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">
-          🗑️ Excluir
-        </button>
-      </div>
-
-    </li>
-  </ul>
+      <ng-template pTemplate="body" let-imovel>
+          <tr>
+              <td style="font-weight: 500;">{{ imovel.titulo }}</td>
+              <td>{{ imovel.endereco }}</td>
+              <td>{{ imovel.bairro }}</td>
+              <td><span style="background: #e5e7eb; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem;">{{ imovel.zona }}</span></td>
+              <td style="color: #22c55e; font-weight: bold;">{{ imovel.valor | currency:'BRL' }}</td>
+              
+              <td style="display: flex; gap: 0.5rem; justify-content: center;">
+                  <p-button icon="pi pi-pencil" [rounded]="true" severity="success" [outlined]="true" [routerLink]="['/editar', imovel.id]"></p-button>
+                  <p-button icon="pi pi-trash" [rounded]="true" severity="danger" [outlined]="true" (onClick)="excluir(imovel.id)"></p-button>
+              </td>
+          </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="6" style="text-align: center; padding: 2rem; color: #6b7280;">
+                  <i class="pi pi-inbox" style="font-size: 2rem; margin-bottom: 10px; color: #9ca3af; display: block;"></i>
+                  Nenhum imóvel cadastrado no momento.
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
 </div>

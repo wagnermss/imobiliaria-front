@@ -1,12 +1,24 @@
-<nav style="padding: 1rem; background-color: #f8f9fa; border-bottom: 1px solid #dee2e6; margin-bottom: 2rem;">
-  <div style="display: flex; gap: 1rem; max-width: 1200px; margin: 0 auto;">
-    <h2 style="margin: 0; margin-right: auto;">Imobiliária</h2>
-    
-    <a routerLink="/lista" style="text-decoration: none; color: #007ad9; font-weight: bold;">Ver Imóveis</a>
-    <a routerLink="/cadastro" style="text-decoration: none; color: #007ad9; font-weight: bold;">Cadastrar Imóvel</a>
+<div style="background-color: #374151; padding: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+      
+      <h2 style="color: #22c55e; margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
+          <i class="pi pi-home" style="font-size: 1.5rem;"></i> Imóbiliária
+      </h2>
+      
+      <div style="display: flex; gap: 1rem; align-items: center;">
+          <a routerLink="/lista" style="color: #f9fafb; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 6px; transition: 0.3s;">
+            <i class="pi pi-list" style="margin-right: 5px;"></i> Catálogo
+          </a>
+          <a routerLink="/cadastro" style="background-color: #22c55e; color: white; text-decoration: none; font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);">
+            <i class="pi pi-plus" style="margin-right: 5px;"></i> Novo Imóvel
+          </a>
+          <a routerLink="/login" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; margin-left: 15px;">
+            <i class="pi pi-sign-out"></i> Sair
+          </a>
+      </div>
   </div>
-</nav>
+</div>
 
-<div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
-  <router-outlet></router-outlet>
+<div style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+<router-outlet></router-outlet>
 </div>

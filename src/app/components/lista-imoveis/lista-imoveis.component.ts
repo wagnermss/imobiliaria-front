@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router'; 
 import { ImovelService } from '../../services/imovel.service';
 import { Imovel } from '../../models/imovel';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-lista-imoveis',
   standalone: true,
-  imports: [CommonModule, RouterLink], 
+  imports: [CommonModule, RouterLink, TableModule, ButtonModule], 
   templateUrl: './lista-imoveis.component.html'
 })
 export class ListaImoveisComponent implements OnInit {
