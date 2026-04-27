@@ -1,29 +1,48 @@
-<div style="max-width: 400px; margin: 80px auto; padding: 30px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Criar Conta</h2>
-  
-  <div style="display: flex; flex-direction: column; gap: 15px;">
+<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; background-color: #f3f4f6;">
     
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">Nome Completo:</label>
-      <input type="text" [(ngModel)]="novoUsuario.nome" placeholder="Seu nome" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
+    <div style="background-color: white; width: 450px; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <i class="pi pi-user-plus" style="font-size: 2.5rem; color: #22c55e;"></i>
+            <h2 style="color: #374151; margin-top: 10px; margin-bottom: 0;">Criar Nova Conta</h2>
+        </div>
 
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">E-mail:</label>
-      <input type="email" [(ngModel)]="novoUsuario.email" placeholder="Seu e-mail" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 500; color: #4b5563;">Nome Completo</label>
+                <input pInputText type="text" [(ngModel)]="novoUsuario.nome" placeholder="Digite seu nome" style="width: 100%;" />
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 500; color: #4b5563;">Endereco</label>
+                <input pInputText type="text" [(ngModel)]="novoUsuario.endereco" placeholder="Digite seu endereco" style="width: 100%;" />
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 500; color: #4b5563;">Celular</label>
+                <input pInputText type="text" [(ngModel)]="novoUsuario.celular" placeholder="Digite seu celular" style="width: 100%;" />
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 500; color: #4b5563;">E-mail</label>
+                <input pInputText type="email" [(ngModel)]="novoUsuario.email" placeholder="seu@email.com" style="width: 100%;" />
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <label style="font-weight: 500; color: #4b5563;">Senha</label>
+                <p-password [(ngModel)]="novoUsuario.senha" [toggleMask]="true" placeholder="Crie uma senha" 
+                            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-password>
+            </div>
+
+            <p-button label="Finalizar Cadastro" icon="pi pi-check" severity="success" 
+                      (onClick)="cadastrar()" styleClass="w-full" [style]="{'width': '100%', 'margin-top': '10px'}"></p-button>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+            <a (click)="voltar()" style="color: #6b7280; text-decoration: none; font-size: 0.95rem; cursor: pointer; font-weight: 500;">
+                <i class="pi pi-arrow-left" style="margin-right: 5px;"></i> Voltar para o Login
+            </a>
+        </div>
+        
     </div>
-    
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">Senha:</label>
-      <input type="password" [(ngModel)]="novoUsuario.senha" placeholder="Crie uma senha" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
-    
-    <button (click)="cadastrar()" style="background-color: #28a745; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 10px;">
-      Cadastrar
-    </button>
-    
-    <div style="text-align: center; margin-top: 15px;">
-      <a routerLink="/login" style="color: #6c757d; text-decoration: none; font-weight: bold; cursor: pointer;">Voltar ao Login</a>
-    </div>
-  </div>
 </div>

@@ -17,9 +17,9 @@ export class LoginComponent {
 
   fazerLogin() {
     this.authService.login(this.credenciais).subscribe({
-      next: (resposta) => {
-        alert('Login efetuado com sucesso!');
-        this.router.navigate(['/lista']); 
+      next: (usuario) => {
+       localStorage.setItem('usuario', JSON.stringify(usuario));
+        this.router.navigate(['/lista']);
       },
       error: (erro) => {
         alert('Falha no login. Verifique seu e-mail e senha.');

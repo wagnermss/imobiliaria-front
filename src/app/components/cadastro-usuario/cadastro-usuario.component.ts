@@ -5,14 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { CardModule } from 'primeng/card';
+
 @Component({
-  selector: 'app-cadastro-usuario',
+ selector: 'app-cadastro-usuario',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, ButtonModule, InputTextModule, PasswordModule],
   templateUrl: './cadastro-usuario.component.html'
 })
 export class CadastroUsuarioComponent {
-  novoUsuario = { nome: '', email: '', senha: '' };
+  novoUsuario = { nome: '', endereco: '', celular: '', email: '', senha: '' };
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -28,4 +33,8 @@ export class CadastroUsuarioComponent {
       }
     });
   }
+  voltar() {
+    this.router.navigate(['/login']);
+  }
+  
 }

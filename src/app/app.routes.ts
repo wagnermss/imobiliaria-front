@@ -3,6 +3,7 @@ import { CadastroImovelComponent } from './components/cadastro-imovel/cadastro-i
 import { ListaImoveisComponent } from './components/lista-imoveis/lista-imoveis.component';
 import { LoginComponent } from './components/login/login.component';
 import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro-usuario.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   
@@ -11,5 +12,8 @@ export const routes: Routes = [
   { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
   { path: 'lista', component: ListaImoveisComponent },
   { path: 'cadastro', component: CadastroImovelComponent },
-  { path: 'editar/:id', component: CadastroImovelComponent }
+  { path: 'editar/:id', component: CadastroImovelComponent },
+  { path: 'lista', component: ListaImoveisComponent, canActivate: [authGuard] },
+  { path: 'cadastro', component: CadastroImovelComponent, canActivate: [authGuard] },
+  { path: 'editar/:id', component: CadastroImovelComponent, canActivate: [authGuard] }
 ];
