@@ -2,6 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface LoginPayload {
+  email: string;
+  senha: string;
+}
+
+export interface CadastroUsuarioPayload {
+  nome: string;
+  endereco: string;
+  telefone: string;
+  email: string;
+  senha: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,11 +23,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credenciais: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credenciais);
+  login(credenciais: LoginPayload): Observable<unknown> {
+    return this.http.post<unknown>(`${this.apiUrl}/login`, credenciais);
   }
 
-  cadastrarUsuario(usuario: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, usuario);
+  cadastrarUsuario(usuario: CadastroUsuarioPayload): Observable<unknown> {
+    return this.http.post<unknown>(`${this.apiUrl}/register`, usuario);
   }
 }

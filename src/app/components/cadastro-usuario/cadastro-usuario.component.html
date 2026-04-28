@@ -1,48 +1,94 @@
 <div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; background-color: #f3f4f6;">
-    
-    <div style="background-color: white; width: 450px; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <i class="pi pi-user-plus" style="font-size: 2.5rem; color: #22c55e;"></i>
-            <h2 style="color: #374151; margin-top: 10px; margin-bottom: 0;">Criar Nova Conta</h2>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <label style="font-weight: 500; color: #4b5563;">Nome Completo</label>
-                <input pInputText type="text" [(ngModel)]="novoUsuario.nome" placeholder="Digite seu nome" style="width: 100%;" />
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <label style="font-weight: 500; color: #4b5563;">Endereco</label>
-                <input pInputText type="text" [(ngModel)]="novoUsuario.endereco" placeholder="Digite seu endereco" style="width: 100%;" />
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <label style="font-weight: 500; color: #4b5563;">Celular</label>
-                <input pInputText type="text" [(ngModel)]="novoUsuario.celular" placeholder="Digite seu celular" style="width: 100%;" />
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <label style="font-weight: 500; color: #4b5563;">E-mail</label>
-                <input pInputText type="email" [(ngModel)]="novoUsuario.email" placeholder="seu@email.com" style="width: 100%;" />
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                <label style="font-weight: 500; color: #4b5563;">Senha</label>
-                <p-password [(ngModel)]="novoUsuario.senha" [toggleMask]="true" placeholder="Crie uma senha" 
-                            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-password>
-            </div>
-
-            <p-button label="Finalizar Cadastro" icon="pi pi-check" severity="success" 
-                      (onClick)="cadastrar()" styleClass="w-full" [style]="{'width': '100%', 'margin-top': '10px'}"></p-button>
-        </div>
-
-        <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
-            <a (click)="voltar()" style="color: #6b7280; text-decoration: none; font-size: 0.95rem; cursor: pointer; font-weight: 500;">
-                <i class="pi pi-arrow-left" style="margin-right: 5px;"></i> Voltar para o Login
-            </a>
-        </div>
-        
+  <div style="background-color: white; width: 450px; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <i class="pi pi-user-plus" style="font-size: 2.5rem; color: #22c55e;"></i>
+      <h2 style="color: #374151; margin-top: 10px; margin-bottom: 0;">Criar Nova Conta</h2>
     </div>
+
+    <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()" novalidate style="display: flex; flex-direction: column; gap: 1.2rem;">
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label style="font-weight: 500; color: #4b5563;">Nome Completo</label>
+        <input
+          type="text"
+          formControlName="nome"
+          required
+          placeholder="Digite seu nome"
+          (input)="clearFieldError('nome')"
+          style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; box-sizing: border-box;"
+        >
+        <small *ngIf="getErrorMessage('nome') as erro" style="color: #dc2626;">{{ erro }}</small>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label style="font-weight: 500; color: #4b5563;">Endereço</label>
+        <input
+          type="text"
+          formControlName="endereco"
+          required
+          placeholder="Digite seu endereço"
+          (input)="clearFieldError('endereco')"
+          style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; box-sizing: border-box;"
+        >
+        <small *ngIf="getErrorMessage('endereco') as erro" style="color: #dc2626;">{{ erro }}</small>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label style="font-weight: 500; color: #4b5563;">Telefone</label>
+        <input
+          type="tel"
+          inputmode="numeric"
+          formControlName="telefone"
+          required
+          pattern="\(\d{2}\)\d{4,5}-\d{4}"
+          maxlength="14"
+          placeholder="Ex: (84)99999-9999"
+          (input)="onTelefoneInput()"
+          style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; box-sizing: border-box;"
+        >
+        <small *ngIf="getErrorMessage('telefone') as erro" style="color: #dc2626;">{{ erro }}</small>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label style="font-weight: 500; color: #4b5563;">E-mail</label>
+        <input
+          type="email"
+          formControlName="email"
+          required
+          placeholder="seu@email.com"
+          (input)="clearFieldError('email')"
+          style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; box-sizing: border-box;"
+        >
+        <small *ngIf="getErrorMessage('email') as erro" style="color: #dc2626;">{{ erro }}</small>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <label style="font-weight: 500; color: #4b5563;">Senha</label>
+        <input
+          type="password"
+          formControlName="senha"
+          required
+          placeholder="Crie uma senha"
+          (input)="clearFieldError('senha')"
+          style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; box-sizing: border-box;"
+        >
+        <small *ngIf="getErrorMessage('senha') as erro" style="color: #dc2626;">{{ erro }}</small>
+      </div>
+
+      <small *ngIf="mensagemErroGeral" style="color: #dc2626;">{{ mensagemErroGeral }}</small>
+
+      <button
+        type="submit"
+        [disabled]="isSubmitting"
+        style="width: 100%; margin-top: 10px; background-color: #16a34a; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600;"
+      >
+        {{ isSubmitting ? 'Cadastrando...' : 'Finalizar Cadastro' }}
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+      <a (click)="voltar()" style="color: #6b7280; text-decoration: none; font-size: 0.95rem; cursor: pointer; font-weight: 500;">
+        <i class="pi pi-arrow-left" style="margin-right: 5px;"></i> Voltar para o Login
+      </a>
+    </div>
+  </div>
 </div>

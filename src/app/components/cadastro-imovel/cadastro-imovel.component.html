@@ -1,35 +1,86 @@
-<div style="padding: 20px; max-width: 500px; margin: 0 auto; background: #f9f9f9; border-radius: 8px;">
-  <h2 style="text-align: center; color: #333;">{{ idEdicao ? 'Editar Imóvel' : 'Novo Cadastro' }}</h2>
+<form
+  [formGroup]="imovelForm"
+  (ngSubmit)="salvar()"
+  novalidate
+  style="padding: 20px; max-width: 500px; margin: 0 auto; background: #f9f9f9; border-radius: 8px;"
+>
+  <h2 style="text-align: center; color: #333;">{{ idEdicao !== null ? 'Editar Imóvel' : 'Novo Cadastro' }}</h2>
 
   <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-    
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">Título:</label>
-      <input type="text" [(ngModel)]="imovel.titulo" placeholder="Ex: Casa com piscina" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label style="font-weight: bold;">Título:</label>
+      <input
+        type="text"
+        formControlName="titulo"
+        required
+        placeholder="Ex: Casa com piscina"
+        (input)="clearFieldError('titulo')"
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+      >
+      <small *ngIf="getErrorMessage('titulo') as erro" style="color: #dc2626;">{{ erro }}</small>
     </div>
 
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">Endereço:</label>
-      <input type="text" [(ngModel)]="imovel.endereco" placeholder="Ex: Rua das Flores, 123" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label style="font-weight: bold;">Endereço:</label>
+      <input
+        type="text"
+        formControlName="endereco"
+        required
+        placeholder="Ex: Rua das Flores, 123"
+        (input)="clearFieldError('endereco')"
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+      >
+      <small *ngIf="getErrorMessage('endereco') as erro" style="color: #dc2626;">{{ erro }}</small>
     </div>
 
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">Bairro:</label>
-      <input type="text" [(ngModel)]="imovel.bairro" placeholder="Ex: Centro" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label style="font-weight: bold;">Bairro:</label>
+      <input
+        type="text"
+        formControlName="bairro"
+        required
+        placeholder="Ex: Centro"
+        (input)="clearFieldError('bairro')"
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+      >
+      <small *ngIf="getErrorMessage('bairro') as erro" style="color: #dc2626;">{{ erro }}</small>
     </div>
 
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">Zona:</label>
-      <input type="text" [(ngModel)]="imovel.zona" placeholder="Ex: Zona Sul" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label style="font-weight: bold;">Zona:</label>
+      <input
+        type="text"
+        formControlName="zona"
+        required
+        placeholder="Ex: Zona Sul"
+        (input)="clearFieldError('zona')"
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+      >
+      <small *ngIf="getErrorMessage('zona') as erro" style="color: #dc2626;">{{ erro }}</small>
     </div>
 
-    <div style="display: flex; flex-direction: column;">
-      <label style="font-weight: bold; margin-bottom: 5px;">Valor (R$):</label>
-      <input type="number" [(ngModel)]="imovel.valor" placeholder="Ex: 250000" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label style="font-weight: bold;">Valor (R$):</label>
+      <input
+        type="text"
+        formControlName="valor"
+        required
+        inputmode="decimal"
+        placeholder="Ex: 1.500,50"
+        (input)="onValorInput()"
+        style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+      >
+      <small *ngIf="getErrorMessage('valor') as erro" style="color: #dc2626;">{{ erro }}</small>
     </div>
 
-    <button (click)="salvar()" style="margin-top: 10px; background-color: #ee933e; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;">
-      Salvar Imóvel
+    <small *ngIf="mensagemErroGeral" style="color: #dc2626;">{{ mensagemErroGeral }}</small>
+
+    <button
+      type="submit"
+      [disabled]="isSubmitting"
+      style="margin-top: 10px; background-color: #ee933e; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;"
+    >
+      {{ isSubmitting ? 'Salvando...' : 'Salvar Imóvel' }}
     </button>
   </div>
-</div>
+</form>
