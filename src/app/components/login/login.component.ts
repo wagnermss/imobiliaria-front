@@ -45,7 +45,7 @@ export class LoginComponent {
     this.authService.login(credenciais).subscribe({
       next: (usuario) => {
         this.isSubmitting = false;
-        localStorage.setItem('usuario', JSON.stringify(usuario));
+        this.authService.salvarSessao(usuario, { email: credenciais.email });
         this.router.navigate(['/lista']);
       },
       error: (erro) => {

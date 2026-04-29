@@ -1,24 +1,104 @@
-<div style="background-color: #3a598c; padding: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-      
-      <h2 style="color: #ee933e; margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
-          <i class="pi pi-home" style="font-size: 1.5rem;"></i> Imóbiliária
-      </h2>
-      
-      <div style="display: flex; gap: 1rem; align-items: center;">
-          <a routerLink="/lista" style="color: #f9fafb; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 6px; transition: 0.3s;">
-            <i class="pi pi-list" style="margin-right: 5px;"></i> Catálogo
-          </a>
-          <a routerLink="/cadastro" style="background-color: #ee933e; color: white; text-decoration: none; font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);">
-            <i class="pi pi-plus" style="margin-right: 5px;"></i> Novo Imóvel
-          </a>
-          <a routerLink="/login" style="color: #9ca3af; text-decoration: none; font-size: 0.9rem; margin-left: 15px;">
-            <i class="pi pi-sign-out"></i> Sair
-          </a>
-      </div>
-  </div>
-</div>
+<ng-container *ngIf="showShell; else publicRoutes">
+  <div class="app-shell">
+    <p-drawer
+      [(visible)]="sidebarVisible"
+      position="left"
+      [modal]="true"
+      [dismissible]="true"
+      [style]="drawerStyle"
+      class="app-drawer"
+    >
+      <ng-template pTemplate="header">
+        <div class="drawer-brand">
+          <p-avatar icon="pi pi-home" shape="circle" size="large" styleClass="drawer-brand-avatar"></p-avatar>
+          <div class="drawer-brand-copy">
+            <strong>Imobiliária</strong>
+            <span>Painel administrativo</span>
+          </div>
+        </div>
+      </ng-template>
 
-<div style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
-<router-outlet></router-outlet>
-</div>
+      <div class="drawer-body">
+        <p-card class="drawer-summary-card">
+          <ng-template pTemplate="title">{{ usuarioNome }}</ng-template>
+          <ng-template pTemplate="subtitle">{{ usuarioEmail }}</ng-template>
+          <p class="drawer-summary-text">
+            Acesse rapidamente o catálogo e o cadastro de imóveis.
+          </p>
+        </p-card>
+
+        <p-divider></p-divider>
+
+        <p-menu [model]="navigationItems" class="drawer-nav-menu"></p-menu>
+      </div>
+    </p-drawer>
+
+    <div class="main-panel">
+      <p-toolbar class="app-toolbar">
+        <ng-template pTemplate="start">
+          <div class="toolbar-start">
+            <p-button
+              icon="pi pi-bars"
+              severity="contrast"
+              [rounded]="true"
+              [text]="true"
+              ariaLabel="Abrir menu"
+              (onClick)="toggleSidebar()"
+            ></p-button>
+
+            <div class="toolbar-title-group">
+              <span class="toolbar-eyebrow">Painel</span>
+              <h1>{{ currentSectionTitle }}</h1>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="end">
+          <div class="toolbar-end">
+            <button
+              pButton
+              type="button"
+              severity="secondary"
+              [text]="true"
+              class="account-trigger"
+              (click)="accountMenu.toggle($event)"
+            >
+              <span class="account-trigger-content">
+                <p-avatar [label]="usuarioInicial" shape="circle" styleClass="account-avatar"></p-avatar>
+                <span class="account-trigger-meta">
+                  <small>Minha Conta</small>
+                  <strong>{{ usuarioNome }}</strong>
+                </span>
+                <i class="pi pi-angle-down"></i>
+              </span>
+            </button>
+
+            <p-menu
+              #accountMenu
+              [model]="accountMenuItems"
+              [popup]="true"
+              appendTo="body"
+              class="account-popup-menu"
+            ></p-menu>
+
+            <p-button
+              label="Sair"
+              icon="pi pi-sign-out"
+              severity="danger"
+              [outlined]="true"
+              (onClick)="logout()"
+            ></p-button>
+          </div>
+        </ng-template>
+      </p-toolbar>
+
+      <main class="content-area">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #publicRoutes>
+  <router-outlet></router-outlet>
+</ng-template>

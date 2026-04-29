@@ -1,0 +1,94 @@
+:host {
+  display: block;
+}
+
+.account-page {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.account-hero {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.account-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.account-hero-copy h3 {
+  margin: 0;
+  color: #24354f;
+  font-size: 1.25rem;
+}
+
+.account-hero-copy p {
+  margin: 0;
+  color: #64748b;
+}
+
+.account-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field-block {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.field-block label {
+  color: #334155;
+  font-weight: 600;
+}
+
+.account-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+:host ::ng-deep .account-card .p-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+:host ::ng-deep .account-card .p-card-title {
+  color: #24354f;
+  font-size: 1.5rem;
+}
+
+:host ::ng-deep .account-card .p-card-subtitle {
+  color: #64748b;
+}
+
+:host ::ng-deep .account-hero-avatar {
+  background: linear-gradient(135deg, #3a598c 0%, #5473a9 100%);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-actions {
+    align-items: stretch;
+  }
+
+  .account-actions p-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,94 @@
+<div class="account-page">
+  <p-card class="account-card">
+    <ng-template pTemplate="title">Minha Conta</ng-template>
+    <ng-template pTemplate="subtitle">Atualize os dados exibidos na sua área administrativa.</ng-template>
+
+    <div class="account-hero">
+      <p-avatar [label]="usuarioInicial" shape="circle" size="xlarge" styleClass="account-hero-avatar"></p-avatar>
+      <div class="account-hero-copy">
+        <h3>{{ contaForm.controls.nome.value || 'Seu perfil' }}</h3>
+        <p>{{ contaForm.controls.email.value || 'Configure os dados da sua conta.' }}</p>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <p-fluid>
+      <form [formGroup]="contaForm" (ngSubmit)="salvar()" novalidate class="account-form">
+        <div class="field-grid">
+          <div class="field-block">
+            <label for="conta-nome">Nome</label>
+            <input
+              id="conta-nome"
+              pInputText
+              type="text"
+              formControlName="nome"
+              placeholder="Digite seu nome completo"
+            >
+            <p-message *ngIf="getErrorMessage('nome') as erro" severity="error" size="small" variant="simple">
+              {{ erro }}
+            </p-message>
+          </div>
+
+          <div class="field-block">
+            <label for="conta-email">E-mail</label>
+            <input
+              id="conta-email"
+              pInputText
+              type="email"
+              formControlName="email"
+              placeholder="seu@email.com"
+            >
+            <p-message *ngIf="getErrorMessage('email') as erro" severity="error" size="small" variant="simple">
+              {{ erro }}
+            </p-message>
+          </div>
+
+          <div class="field-block">
+            <label for="conta-endereco">Endereço</label>
+            <input
+              id="conta-endereco"
+              pInputText
+              type="text"
+              formControlName="endereco"
+              placeholder="Digite seu endereço"
+            >
+            <p-message *ngIf="getErrorMessage('endereco') as erro" severity="error" size="small" variant="simple">
+              {{ erro }}
+            </p-message>
+          </div>
+
+          <div class="field-block">
+            <label for="conta-telefone">Telefone</label>
+            <input
+              id="conta-telefone"
+              pInputText
+              type="tel"
+              inputmode="numeric"
+              formControlName="telefone"
+              placeholder="Ex: (84)99999-9999"
+              maxlength="14"
+              (input)="onTelefoneInput()"
+            >
+            <p-message *ngIf="getErrorMessage('telefone') as erro" severity="error" size="small" variant="simple">
+              {{ erro }}
+            </p-message>
+          </div>
+        </div>
+
+        <div class="account-actions">
+          <p-message *ngIf="mensagemSucesso" severity="success" size="small">
+            {{ mensagemSucesso }}
+          </p-message>
+
+          <p-button
+            type="submit"
+            label="Salvar Alterações"
+            icon="pi pi-check"
+            severity="contrast"
+          ></p-button>
+        </div>
+      </form>
+    </p-fluid>
+  </p-card>
+</div>
